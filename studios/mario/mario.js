@@ -1,5 +1,34 @@
 
-drawPyramid(5);
+/**
+ * determineHeightAndThenDrawPyramid
+ *
+ * Determines the current value that the user has typed in the 'How high?' text-box,
+ * and then draws a pyramid with that height.
+ */
+function determineHeightAndThenDrawPyramid() {
+
+    // just so we know we're here
+    //console.log("someone invoked the determineHeightAndThenDrawPyramid function!");
+
+    // TODO 3
+    // figure out the height the user typed (replace the "5" below)
+    heightStr = document.getElementById("height").value;
+
+    // here we convert the string to an int
+    height = parseInt(heightStr);
+
+    // TODO 2
+    // draw the pyramid with the given height
+    drawPyramid(height);
+}
+
+
+// TODO 1
+// hook up the button's click event to our determineHeightAndThenDrawPyramid function
+var button = document.querySelector("button");
+button.addEventListener("click", function() {
+    determineHeightAndThenDrawPyramid();
+});
 
 
 /**
@@ -7,38 +36,36 @@ drawPyramid(5);
  *
  * Renders, in the HTML document, a Mario pyramid of the specified height
  */
-function drawPyramid(height) {
+ function drawPyramid(height) {
 
-    // TODO 2
-    // delete the "under construction" element, ie the <div id="notice">
-    var notice = document.getElementById("notice");
-    notice.parentNode.removeChild(notice);
+     // TODO 4
+     // before drawing, clear the old content
 
-    // for each row....
-    for (var i = 0; i < height; i++) {
 
-        // figure out number of bricks and spaces
-        var numBricks = i + 2;
-        var numSpaces = height - i - 1;
+     // for each row....
+     for (var row = 0; row < height; row++) {
 
-        // build up a string for this row
-        var rowStr = "";
-        for (var j = 0; j < numSpaces; j++) {
-            rowStr += "."; // QUIZ: what happens if we use a space (" ") instead of a period?
-        }
-        for (var j = 0; j < numBricks; j++) {
-            rowStr += "#";
-        }
+         // figure out number of bricks and spaces
+         var numBricks = row + 2;
+         var numSpaces = height - row - 1;
 
-        // TODO 1
-        // create an element whose inner text is rowStr,
-        // and insert it as a child of the container <div id="pyramid">
-        var pyramid = document.getElementById("pyramid");
-        var paragraph = document.createElement("p");
-        var row = document.createTextNode(rowStr);
-        paragraph.appendChild(row);
-        pyramid.appendChild(paragraph);
+         // build up a string for this row
+         var rowStr = "";
+         for (var i = 0; i < numSpaces; i++) {
+             rowStr += ".";
+         }
+         for (var i = 0; i < numBricks; i++) {
+             rowStr += "#";
+         }
 
-        
+        // create a text element with the string of characters
+        textElem = document.createTextNode(rowStr);
+
+        // create a <p> element with the text inside
+        rowElem = document.createElement("p");
+        rowElem.appendChild(textElem);
+
+        // insert the paragraph as a child of the container <div>
+        document.getElementById("pyramid").appendChild(rowElem);
     }
 }

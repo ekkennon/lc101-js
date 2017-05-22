@@ -1,0 +1,9 @@
+<input type="text">
+<script>
+  addEventListener("keydown", function(event) {
+    if (event.keyCode == 81 || event.keyCode == 87 || event.keyCode == 88) {
+      console.log("Nope.");
+      event.preventDefault();
+    }
+  });
+</script>

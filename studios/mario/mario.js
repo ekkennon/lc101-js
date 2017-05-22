@@ -40,7 +40,12 @@ button.addEventListener("click", function() {
 
      // TODO 4
      // before drawing, clear the old content
-
+     var prgh = document.getElementsByClassName("pyrmd");
+     var pyramid = document.getElementById("pyramid");
+     while (prgh.length > 0) {
+        pyramid.removeChild(prgh[0]);
+     }
+     
 
      // for each row....
      for (var row = 0; row < height; row++) {
@@ -63,9 +68,10 @@ button.addEventListener("click", function() {
 
         // create a <p> element with the text inside
         rowElem = document.createElement("p");
+        rowElem.setAttribute("class", "pyrmd");
         rowElem.appendChild(textElem);
 
         // insert the paragraph as a child of the container <div>
-        document.getElementById("pyramid").appendChild(rowElem);
+        pyramid.appendChild(rowElem);
     }
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Working with forms using JS</title>
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+		<form id="user-registration">
+			<table>
+				<tr>
+					<td><input required placeholder="Username" type="text" name="username" /></td>
+				</tr>
+				<tr>
+					<td><input required placeholder="Email" type="email" name="email" /></td>
+				</tr>
+				<tr>
+					<td><input required placeholder="Password" type="password" name="password" /></td>
+				</tr>
+				<tr>
+					<td><input required placeholder="Verify Password" type="password" name="verify" /></td>
+				</tr>
+			</table>
+			<input type="submit" value="Register" />
+		</form>
+
+		<div id="form-data-display"></div>
+		<script>
+			var form = document.getElementById("user-registration");
+			form.addEventListener("submit", validateForm);
+
+			function validateForm(event) {
+				var reportString = "Success!";
+
+				if (form.username.value.length < 5) {
+					reportString = "Username must be at least 5 characters!";
+				} else if (form.password.value != form.verify.value) {
+					reportString = "Passwords do not match!";
+				}
+
+				var outputDiv = document.getElementById("form-data-display");
+				outputDiv.innerHTML = reportString;
+				event.preventDefault();
+			}
+		</script>
+	</body>
+</html>

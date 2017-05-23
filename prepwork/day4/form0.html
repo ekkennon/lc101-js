@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>form-0</title>
+		<meta charset="UTF-8" />
+	</head>
+	<body>
+		<form action="register.php" method="post" id="registration">
+			<input required placeholder="Email" name="email" type="email" />
+			<input required placeholder="Password" name="password" type="password" />
+			<input required placeholder="Verify Password" name="verify" type="password" />
+			<label> I agree to the terms and conditions <input required type="checkbox" name="agree" /></label>
+			<input type="submit" value="Register" />
+		</form>
+
+		<script>
+			var form = document.getElementById("registration");
+			form.onsubmit = function() {
+				if (form.password.value != form.verify.value) {
+					alert("Passwords do not match");
+					return false;//so form is not submitted to register.php
+				}
+				return true;
+			};
+		</script>
+	</body>
+</html>

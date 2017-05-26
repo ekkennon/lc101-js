@@ -1,35 +1,30 @@
 
 
-var heightElem = document.getElementById("height");
-var formElem = document.getElementById("draw-form");
-
 // set a handler function for the form's submission event
-formElem.onsubmit = function(event) {
+$("#draw-form").submit(function(event) {
 
-    // QUIZ
-    // what happens if we don't do this?
+    // prevent the form from submitting (otherwise page will refresh)
     event.preventDefault();
 
-    // QUIZ
-    // what happens if we don't do this?
-    //clearError();
+    // clear any previous error message that might be displayed from last time
+    clearError();
 
-    // figure out the height the user typed
-    heightStr = heightElem.value;
+    // TODO 3
+    // figure out the height the user typed (replace the "5" below)
+    heightStr = $("#height").val();
 
-    // TODO 1
-    // if they didn't type anything at all, give a different error message,
-    // something like "Please provide a height"
-
+    // if they didn't type anything, yell at them and exit early
+    if (heightStr == "") {
+        displayError("Please provide a height");
+        return;
+    }
 
     // convert the string to an int
     height = parseInt(heightStr);
 
-    // if the height is not-a-number, yell at them and exit early
-    // TODO 2
-    // negative numbers and zero should also be rejected here
-    /*if (isNaN(height)) {
-        displayError("That's not a valid height.");
+    // if the height is not-a-number or not positive, yell at them and exit early
+    if (isNaN(height) || height < 1) {
+        displayError(heightStr + ": That's not a valid height.");
         return;
     }
 
@@ -38,11 +33,11 @@ formElem.onsubmit = function(event) {
     if (height > tooTall) {
         displayError("Are you cray? I can't build a pyramid that tall.");
         return;
-    }*/
+    }
 
     // draw pyramid with the specified height
     drawPyramid(height);
-}
+});
 
 
 /**
@@ -51,8 +46,10 @@ formElem.onsubmit = function(event) {
  * Displays an error message on the text input, and colors it red
  */
 function displayError(message) {
-    heightElem.className = "invalid-field";
-    document.querySelector(".error-message").innerHTML = message;
+    // TODO 4
+    // implement this function using jQuery
+    $("#height").addClass("invalid-field");
+    $(".error-message").text(message);
 }
 
 
@@ -62,8 +59,8 @@ function displayError(message) {
  * Undisplays the error message and removes the red CSS style
  */
 function clearError(message) {
-    // TODO 3
-    // implement this function.
+    $("#height").removeClass("invalid-field");
+    $(".error-message").text("");
 }
 
 
@@ -75,8 +72,9 @@ function clearError(message) {
  */
 function drawPyramid(height) {
 
-    // first, clear the old content
-    document.getElementById("pyramid").innerHTML = "";
+    // TODO 2
+    // clear the old content from the #pyramid container
+    $("#pyramid").empty();
 
     // for each row....
     for (var row = 0; row < height; row++) {
@@ -88,16 +86,18 @@ function drawPyramid(height) {
         // build up a string for this row
         var rowStr = "";
         for (var i = 0; i < numSpaces; i++) {
-            var spaceChar = "&nbsp"; // this is the HTML encoding for a space " "
+            var spaceChar = "&nbsp";
             rowStr += spaceChar;
         }
         for (var i = 0; i < numBricks; i++) {
             rowStr += "#";
         }
 
-        // make a <p> element for this row, and insert it into the #pyramid container
-        rowElem = document.createElement("p");
-        rowElem.innerHTML = rowStr;
-        document.getElementById("pyramid").appendChild(rowElem);
+        // make a <p> element for this row
+        rowElem = $("<p>").html(rowStr);
+
+        // TODO 1
+        // insert the paragraph into the #pyramid container
+        $("#pyramid").append(rowElem);
     }
 }

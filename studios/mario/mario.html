@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <style>
         #pyramid {
             line-height: 0;
@@ -20,6 +21,7 @@
             color: red;
         }
     </style>
+
 </head>
 <body>
     <h1>Mario 4</h1>
@@ -32,10 +34,8 @@
     <form id="draw-form">
         <label>
             How high?
-            <input required type="number" id="height" min="1" max="50" />
-            <label class="error-message">
-                <!-- If there was a user error, we will put a message in here -->
-            </label>
+            <input type="text" id="height"/>
+            <label class="error-message"></label>
         </label>
         <br><br>
         <input type="submit" value="Draw a pyramid"/>
@@ -45,6 +45,7 @@
 
     <div id="pyramid"></div>
 
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="mario.js"></script>
 </body>
 </html>
